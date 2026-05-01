@@ -705,6 +705,7 @@
     </footer>
 
     <script>
+        emailjs.init('780hc1AKIBcVHm_8R'); // Replace with your EmailJS public key
         let currentSlide = 0;
         const totalSlides = 4;
         let isDragging = false;
@@ -810,9 +811,6 @@
             if (e.key === 'ArrowLeft') changeSlide(-1);
             if (e.key === 'ArrowRight') changeSlide(1);
         });
-
-        // Initialize EmailJS
-        emailjs.init('780hc1AKIBcVHm_8R'); // Replace with your EmailJS public key
 
         const commentForm = document.getElementById('commentForm');
         const formStatus = document.getElementById('form-status');
