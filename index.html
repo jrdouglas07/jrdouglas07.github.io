@@ -46,7 +46,7 @@
             background: #b91c1c;
         }
 
-        /* Modified Cart Button - Transparent */
+        /* Modified Cart Button - Transparent Background */
         .cart-button {
             background: transparent;
             color: #1f2937;
@@ -58,11 +58,6 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: opacity 0.2s;
-        }
-
-        .cart-button:hover {
-            opacity: 0.7;
         }
 
         /* The Dropdown Menu - hidden by default */
@@ -70,13 +65,13 @@
             display: none; 
             position: absolute;
             right: 0;
-            top: 110%;
+            top: 110%; 
             background: white;
             width: 250px;
             border-radius: 0.5rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             padding: 1rem;
-            z-index: 9999;
+            z-index: 9999; 
         }
 
         /* This class will be added by JavaScript when clicked */
@@ -262,7 +257,7 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Shop Section - Renamed to OUR SHOPS */
+        /* Updated Shop Section Styles */
         .shop-section h2, .about-section h2, .comments-section h2 {
             font-size: 2.5rem;
             text-align: center;
@@ -300,12 +295,7 @@
             object-fit: cover;
         }
 
-        .product-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .social-shop-btn {
+        .social-link-btn {
             display: inline-block;
             width: 100%;
             background: #34ABCC;
@@ -318,7 +308,7 @@
             transition: background 0.3s;
         }
 
-        .social-shop-btn:hover {
+        .social-link-btn:hover {
             background: #2a8ba8;
         }
 
@@ -525,14 +515,14 @@
         </div>
         <div class="cart-container">
             <button class="cart-button" onclick="toggleCart()">
-                🛒 <span id="cart-count">0</span>
+                🛒 Cart (<span id="cart-count">0</span>)
             </button>
 
             <div id="cartDropdown" class="cart-dropdown">
                 <h3>Our Shops</h3>
                 <hr>
                 <div id="cart-items-preview">
-                    <p style="color: #666; font-size: 0.9rem;">Explore our external shops on slide 2.</p>
+                    <p style="color: #666; font-size: 0.9rem;">Visit our social storefronts on slide 2.</p>
                 </div>
                 <hr>
                 <button class="checkout-btn" onclick="goToSlide(1)">Go to Our Shops</button>
@@ -572,29 +562,29 @@
                             
                             <div class="product-card">
                                 <div class="product-image-container">
-                                    <img src="https://placehold.co/400x400?text=TikTok+Icon" alt="TikTok">
+                                    <img src="https://placehold.co/400x400?text=TikTok+Store" alt="TikTok Store">
                                 </div>
-                                <h3>TikTok</h3>
-                                <p>Follow us for latest updates and viral finds.</p>
-                                <a href="https://www.tiktok.com/@yourusername" target="_blank" class="social-shop-btn">Go to TikTok</a>
+                                <h3>TikTok Shop</h3>
+                                <p>Discover our viral products and daily deals.</p>
+                                <a href="https://www.tiktok.com/@yourusername" target="_blank" class="social-link-btn">Visit TikTok</a>
                             </div>
 
                             <div class="product-card">
                                 <div class="product-image-container">
-                                    <img src="https://placehold.co/400x400?text=Instagram+Icon" alt="Instagram">
+                                    <img src="https://placehold.co/400x400?text=Instagram+Store" alt="Instagram Store">
                                 </div>
-                                <h3>Instagram</h3>
-                                <p>Check out our gallery and featured products.</p>
-                                <a href="https://www.instagram.com/yourusername" target="_blank" class="social-shop-btn">Go to Instagram</a>
+                                <h3>Instagram Shop</h3>
+                                <p>Follow us for updates and exclusive content.</p>
+                                <a href="https://www.instagram.com/yourusername" target="_blank" class="social-link-btn">Visit Instagram</a>
                             </div>
 
                             <div class="product-card">
                                 <div class="product-image-container">
-                                    <img src="https://placehold.co/400x400?text=Facebook+Icon" alt="Facebook">
+                                    <img src="https://placehold.co/400x400?text=Facebook+Market" alt="Facebook Market">
                                 </div>
-                                <h3>Facebook</h3>
-                                <p>Connect with us on our official page.</p>
-                                <a href="https://www.facebook.com/yourusername" target="_blank" class="social-shop-btn">Go to Facebook</a>
+                                <h3>Facebook Marketplace</h3>
+                                <p>Connect with our community storefront.</p>
+                                <a href="https://www.facebook.com/yourusername" target="_blank" class="social-link-btn">Visit Facebook</a>
                             </div>
 
                         </div>
@@ -732,7 +722,7 @@
             startPos = getPositionX(event);
             animationID = requestAnimationFrame(animation);
             carouselContainer.style.cursor = 'grabbing';
-            carouselWrapper.style.transition = 'none'; // Disable transition during drag
+            carouselWrapper.style.transition = 'none';
         }
 
         function drag(event) {
@@ -863,7 +853,7 @@
             }
         }
 
-        // Handle window resizing to keep carousel position correct
+        // Handle window resizing
         window.addEventListener('resize', setPositionByIndex);
     </script>
 </body>
