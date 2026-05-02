@@ -6,18 +6,13 @@
     <title>JX Innovate LLC</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
-        /* CSS Variables for easy color management */
         :root {
             --brand-blue: #34ABCC;
             --brand-dark: #1f2937;
             --bg-light: #f3f4f6;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -27,7 +22,7 @@
             flex-direction: column;
         }
 
-        /* Header & Cart */
+        /* Header & Transparent Cart */
         header {
             background: white;
             padding: 2rem 0;
@@ -64,10 +59,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: opacity 0.2s;
         }
-
-        .cart-button:hover { opacity: 0.6; }
 
         .cart-dropdown {
             display: none;
@@ -107,7 +99,7 @@
         .slide { 
             min-width: 100%; 
             height: 100%; 
-            padding: 3rem 2rem; 
+            padding: 2rem; 
             overflow-y: auto; 
         }
 
@@ -129,38 +121,37 @@
         .carousel-arrow.prev { left: 20px; }
         .carousel-arrow.next { right: 20px; }
 
+        /* Home Section Styles */
+        .home-section { text-align: center; padding-top: 2rem; }
+        .swipe-indicators { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .swipe-box { background: var(--brand-blue); color: white; padding: 1.5rem; border-radius: 0.5rem; width: 140px; }
+        .swipe-box .arrow { font-size: 1.5rem; font-weight: bold; }
+
         /* Shops Grid Section */
         .shop-section h2 { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; }
-        
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             max-width: 1100px;
             margin: 0 auto;
         }
-
         .product-card {
             background: white;
             border: 1px solid #e5e7eb;
             border-radius: 0.75rem;
             padding: 1.5rem;
             text-align: center;
-            transition: transform 0.3s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-
-        .product-card:hover { transform: translateY(-8px); }
-
         .product-image {
             width: 100%;
-            height: 220px;
+            height: 180px;
             object-fit: cover;
             border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             background: #eee;
         }
-
         .social-link-btn {
             display: block;
             background: var(--brand-blue);
@@ -170,56 +161,27 @@
             border-radius: 0.4rem;
             font-weight: bold;
             margin-top: 1rem;
-            transition: background 0.3s;
         }
 
-        .social-link-btn:hover { background: #2a8ba8; }
-
-        /* Common Slide Styles */
-        .carousel-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
+        /* About Section Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
+        .stat-box { text-align: center; padding: 1.5rem; background: #f9fafb; border-radius: 0.5rem; }
+        .stat-number { font-size: 2rem; font-weight: bold; color: var(--brand-blue); }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.1);
-            border: 2px solid var(--brand-blue);
-            cursor: pointer;
-        }
+        /* Form Styles */
+        .comment-form { max-width: 500px; margin: 0 auto; background: #f9fafb; padding: 2rem; border-radius: 0.5rem; }
+        .comment-form input, .comment-form textarea { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 0.3rem; }
 
+        .carousel-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(0,0,0,0.1); border: 2px solid var(--brand-blue); cursor: pointer; }
         .dot.active { background: var(--brand-blue); }
 
-        footer {
-            background: var(--brand-dark);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        /* Form Styling */
-        .comment-form {
-            max-width: 500px;
-            margin: 0 auto;
-            background: #f9fafb;
-            padding: 2rem;
-            border-radius: 0.5rem;
-        }
-
-        .comment-form input, .comment-form textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 0.3rem;
-        }
+        footer { background: var(--brand-dark); color: white; padding: 2rem; text-align: center; }
     </style>
 </head>
 <body>
@@ -233,10 +195,9 @@
                 🛒 <span id="cart-count">0</span>
             </button>
             <div id="cartDropdown" class="cart-dropdown">
-                <h3 style="margin-bottom: 10px;">Quick Links</h3>
-                <hr>
-                <p style="font-size: 0.85rem; padding: 10px 0; color: #666;">Explore our social shops below!</p>
-                <button class="social-link-btn" onclick="goToSlide(1)">Go to Shops</button>
+                <h3>Quick Links</h3>
+                <hr style="margin: 10px 0;">
+                <button class="social-link-btn" onclick="goToSlide(1)">View Our Shops</button>
             </div>
         </div>
     </header>
@@ -249,11 +210,21 @@
             <div class="carousel-wrapper" id="carouselWrapper">
                 
                 <div class="slide">
-                    <div style="text-align: center; padding-top: 4rem;">
-                        <h2 style="font-size: 3rem;">Welcome to JX Innovate</h2>
-                        <p style="margin: 1.5rem 0; font-size: 1.2rem; color: #4b5563;">
-                            Your destination for innovation. Swipe to visit our social storefronts.
+                    <div class="home-section">
+                        <h2 style="font-size: 3rem; margin-bottom: 1rem;">Welcome to JX Innovate LLC</h2>
+                        <p style="max-width: 700px; margin: 0 auto; color: #4b5563; font-size: 1.2rem;">
+                            Innovative solutions for modern businesses. Swipe left or right to explore our social shops, about us, and contact page.
                         </p>
+                        <div class="swipe-indicators">
+                            <div class="swipe-box">
+                                <div class="arrow">←</div>
+                                <div>Swipe Left</div>
+                            </div>
+                            <div class="swipe-box">
+                                <div class="arrow">→</div>
+                                <div>Swipe Right</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -261,51 +232,60 @@
                     <div class="shop-section">
                         <h2>Our Shops</h2>
                         <div class="products-grid">
-                            
                             <div class="product-card">
-                                <img src="https://placehold.co/400x400?text=TikTok+Logo" alt="TikTok" class="product-image">
+                                <img src="https://placehold.co/400x400?text=TikTok+Logo" class="product-image">
                                 <h3>TikTok Shop</h3>
-                                <p>Discover our viral products and daily deals.</p>
+                                <p>Latest trends and viral products.</p>
                                 <a href="https://www.tiktok.com/@yourusername" target="_blank" class="social-link-btn">Visit TikTok</a>
                             </div>
-
                             <div class="product-card">
-                                <img src="https://placehold.co/400x400?text=Instagram+Logo" alt="Instagram" class="product-image">
+                                <img src="https://placehold.co/400x400?text=Instagram+Logo" class="product-image">
                                 <h3>Instagram Shop</h3>
-                                <p>Curated collections and lifestyle inspiration.</p>
+                                <p>Lifestyle products and gallery.</p>
                                 <a href="https://www.instagram.com/yourusername" target="_blank" class="social-link-btn">Visit Instagram</a>
                             </div>
-
                             <div class="product-card">
-                                <img src="https://placehold.co/400x400?text=Facebook+Logo" alt="Facebook" class="product-image">
+                                <img src="https://placehold.co/400x400?text=Facebook+Logo" class="product-image">
                                 <h3>Facebook Marketplace</h3>
-                                <p>Local and community-focused commerce.</p>
+                                <p>Community-focused storefront.</p>
                                 <a href="https://www.facebook.com/yourusername" target="_blank" class="social-link-btn">Visit Facebook</a>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
                 <div class="slide">
-                    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                        <h2>About JX Innovate</h2>
-                        <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 2rem; color: #374151;">
-                            We are committed to delivering cutting-edge solutions and bridging the gap between innovative design and social commerce. Our platforms are designed to make high-quality products accessible to everyone, everywhere.
-                        </p>
+                    <div style="max-width: 900px; margin: 0 auto;">
+                        <h2 style="text-align: center; margin-bottom: 1.5rem;">About JX Innovate LLC</h2>
+                        <p style="line-height: 1.7; color: #374151; margin-bottom: 1rem;">JX Innovate LLC is a forward-thinking company dedicated to delivering cutting-edge solutions that transform the way businesses operate in the digital age.</p>
+                        <p style="line-height: 1.7; color: #374151;">Founded with a vision to innovate and inspire, we specialize in creating products that empower our clients to achieve their goals.</p>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-number">10+</div>
+                                <div style="color: #6b7280;">Years Experience</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">500+</div>
+                                <div style="color: #6b7280;">Happy Clients</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">100+</div>
+                                <div style="color: #6b7280;">Projects</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="slide">
-                    <h2 style="text-align: center; margin-bottom: 2rem;">Contact & Questions</h2>
+                    <h2 style="text-align: center; margin-bottom: 1.5rem;">Contact Us</h2>
                     <form id="commentForm" class="comment-form">
-                        <input type="text" id="name" placeholder="Full Name" required>
-                        <input type="email" id="email" placeholder="Email Address" required>
-                        <textarea id="message" placeholder="How can we help you?" required></textarea>
-                        <button type="submit" class="social-link-btn" style="border: none; cursor: pointer; width: 100%;">Send Message</button>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="social-link-btn" style="border:none; cursor:pointer; width:100%;">Submit</button>
                     </form>
+                    <div id="form-status" style="margin-top: 1rem; text-align: center; display: none; padding: 1rem; border-radius: 0.3rem;"></div>
                 </div>
-
             </div>
 
             <div class="carousel-dots">
@@ -318,55 +298,66 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 JX Innovate LLC. All rights reserved.</p>
-        <p style="font-size: 0.9rem; color: #9ca3af; margin-top: 0.5rem;">jxi2026@outlook.com</p>
+        <p>&copy; 2026 JX Innovate LLC. | jxi2026@outlook.com</p>
     </footer>
 
     <script>
-        // Carousel Logic
+        emailjs.init('780hc1AKIBcVHm_8R');
         let currentSlide = 0;
         const totalSlides = 4;
         const wrapper = document.getElementById('carouselWrapper');
-        const dots = document.querySelectorAll('.dot');
 
         function updateCarousel() {
             wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
             });
         }
 
-        function changeSlide(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        function changeSlide(dir) {
+            currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
             updateCarousel();
         }
 
-        function goToSlide(index) {
-            currentSlide = index;
+        function goToSlide(idx) {
+            currentSlide = idx;
             updateCarousel();
         }
 
-        // Cart Dropdown Logic
         function toggleCart() {
             document.getElementById("cartDropdown").classList.toggle("show-cart");
         }
 
-        // Close dropdown when clicking outside
-        window.onclick = function(event) {
-            if (!event.target.matches('.cart-button') && !event.target.closest('.cart-button')) {
-                const dropdown = document.getElementById("cartDropdown");
-                if (dropdown.classList.contains('show-cart')) {
-                    dropdown.classList.remove('show-cart');
-                }
+        document.getElementById('commentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const status = document.getElementById('form-status');
+            
+            const params = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value,
+                to_email: 'jxi2026@outlook.com'
+            };
+
+            emailjs.send('service_e5uykek', 'template_l95jm78', params)
+                .then(() => {
+                    status.textContent = 'Message Sent Successfully!';
+                    status.style.background = '#d4edda';
+                    status.style.display = 'block';
+                    this.reset();
+                })
+                .catch(() => {
+                    status.textContent = 'Error sending message.';
+                    status.style.background = '#f8d7da';
+                    status.style.display = 'block';
+                });
+        });
+
+        window.onclick = function(e) {
+            if (!e.target.closest('.cart-container')) {
+                document.getElementById("cartDropdown").classList.remove('show-cart');
             }
         }
-
-        // EmailJS Integration (Stub)
-        document.getElementById('commentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert("Thank you! Your message has been sent to jxi2026@outlook.com");
-            this.reset();
-        });
     </script>
 </body>
 </html>
