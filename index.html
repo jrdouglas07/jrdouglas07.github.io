@@ -3,89 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JX Innovate LLC</title> <!-- show on browser tab -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <title>JX Innovate LLC</title> <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         /* Position the container in the top right of the header */
-.cart-container {
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
+        .cart-container {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
 
-.cart-item strong {
-    font-weight: 600;
-}
+        .cart-item strong {
+            font-weight: 600;
+        }
 
-.cart-total {
-    margin-top: 0.75rem;
-    border-top: 1px solid #e5e7eb;
-    padding-top: 0.75rem;
-}
+        .cart-total {
+            margin-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.75rem;
+        }
 
-.remove-btn {
-    background: #dc2626;
-    color: white;
-    border: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: bold;
-}
+        .remove-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
 
-.remove-btn:hover {
-    background: #b91c1c;
-}
+        .remove-btn:hover {
+            background: #b91c1c;
+        }
 
-.cart-button {
-    background: #34ABCC;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 2rem;
-    cursor: pointer;
-    font-weight: bold;
-}
+        /* UPDATED: Cart Button without background */
+        .cart-button {
+            background: transparent;
+            color: #1f2937;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: opacity 0.2s;
+        }
 
-/* The Dropdown Menu - hidden by default */
-.cart-dropdown {
-    display: none; /* This hides the menu until we click */
-    position: absolute;
-    right: 0;
-    top: 110%; /* Places it just below the button */
-    background: white;
-    width: 250px;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    padding: 1rem;
-    z-index: 9999; /* Ensures it floats over other contentl */
-}
+        .cart-button:hover {
+            opacity: 0.7;
+        }
 
-/* This class will be added by JavaScript when clicked */
-.show-cart {
-    display: block;
-}
+        /* The Dropdown Menu - hidden by default */
+        .cart-dropdown {
+            display: none; /* This hides the menu until we click */
+            position: absolute;
+            right: 0;
+            top: 110%; /* Places it just below the button */
+            background: white;
+            width: 250px;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 1rem;
+            z-index: 9999; /* Ensures it floats over other contentl */
+        }
 
-.checkout-btn {
-    width: 100%;
-    background: #1f2937;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-}
+        /* This class will be added by JavaScript when clicked */
+        .show-cart {
+            display: block;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #1f2937;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -526,7 +535,7 @@
         </div>
         <div class="cart-container">
             <button class="cart-button" onclick="toggleCart()">
-                🛒 Cart (<span id="cart-count">0</span>)
+                🛒 <span id="cart-count">0</span>
             </button>
 
             <div id="cartDropdown" class="cart-dropdown">
@@ -547,7 +556,6 @@
             <button class="carousel-arrow next" onclick="changeSlide(1)">›</button>
 
             <div class="carousel-wrapper" id="carouselWrapper">
-                <!-- Slide 1: Home -->
                 <div class="slide">
                     <div class="home-section">
                         <div class="home-content">
@@ -567,7 +575,6 @@
                     </div>
                 </div>
 
-                <!-- Slide 2: Shop -->
                 <div class="slide">
                     <div class="shop-section">
                         <h2>Our Shop</h2>
@@ -603,7 +610,6 @@
                     </div>
                 </div>
 
-                <!-- Slide 3: About -->
                 <div class="slide">
                     <div class="about-section">
                         <div class="about-content">
@@ -628,7 +634,6 @@
                     </div>
                 </div>
 
-                <!-- Slide 4: Comments -->
                 <div class="slide">
                     <div class="comments-section">
                         <h2>Comments & Questions</h2>
@@ -908,22 +913,19 @@
         updateCartUI();
 
         function toggleCart() {
-    // Finds the dropdown menu by its ID
-    const dropdown = document.getElementById("cartDropdown");
-    
-    // ".classList.toggle" is a shortcut that adds or removes the 'show-cart' class
-    dropdown.classList.toggle("show-cart");
-}
-
-// Optional: Close the cart if the user clicks anywhere else on the screen
-window.onclick = function(event) {
-    if (!event.target.matches('.cart-button')) {
-        const dropdown = document.getElementById("cartDropdown");
-        if (dropdown.classList.contains('show-cart')) {
-            dropdown.classList.remove('show-cart');
+            const dropdown = document.getElementById("cartDropdown");
+            dropdown.classList.toggle("show-cart");
         }
-    }
-}
+
+        // Close the cart if the user clicks anywhere else on the screen
+        window.onclick = function(event) {
+            if (!event.target.matches('.cart-button') && !event.target.closest('.cart-button')) {
+                const dropdown = document.getElementById("cartDropdown");
+                if (dropdown.classList.contains('show-cart')) {
+                    dropdown.classList.remove('show-cart');
+                }
+            }
+        }
     </script>
 </body>
 </html>
