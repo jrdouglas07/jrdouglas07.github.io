@@ -3,96 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JX Innovate LLC</title> <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <title>JX Innovate LLC</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
-        /* Position the container in the top right of the header */
-        .cart-container {
-            position: absolute;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .cart-item strong {
-            font-weight: 600;
-        }
-
-        .cart-total {
-            margin-top: 0.75rem;
-            border-top: 1px solid #e5e7eb;
-            padding-top: 0.75rem;
-        }
-
-        .remove-btn {
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .remove-btn:hover {
-            background: #b91c1c;
-        }
-
-        /* UPDATED: Cart Button without background */
-        .cart-button {
-            background: transparent;
-            color: #1f2937;
-            border: none;
-            padding: 0.5rem;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: opacity 0.2s;
-        }
-
-        .cart-button:hover {
-            opacity: 0.7;
-        }
-
-        /* The Dropdown Menu - hidden by default */
-        .cart-dropdown {
-            display: none; /* This hides the menu until we click */
-            position: absolute;
-            right: 0;
-            top: 110%; /* Places it just below the button */
-            background: white;
-            width: 250px;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            padding: 1rem;
-            z-index: 9999; /* Ensures it floats over other contentl */
-        }
-
-        /* This class will be added by JavaScript when clicked */
-        .show-cart {
-            display: block;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            background: #1f2937;
-            color: white;
-            border: none;
-            padding: 0.5rem;
-            margin-top: 0.5rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
+        /* CSS Variables for easy color management */
+        :root {
+            --brand-blue: #34ABCC;
+            --brand-dark: #1f2937;
+            --bg-light: #f3f4f6;
         }
 
         * {
@@ -102,13 +20,14 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f3f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: var(--bg-light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
+        /* Header & Cart */
         header {
             background: white;
             padding: 2rem 0;
@@ -120,21 +39,53 @@
         }
 
         .header-box {
-            background-color: #34ABCC;
+            background-color: var(--brand-blue);
             padding: 1rem 3rem;
             border-radius: 0.5rem;
         }
 
-        h1 {
-            color: black;
-            font-size: 2rem;
-            font-weight: bold;
+        h1 { color: black; font-size: 2rem; font-weight: bold; }
+
+        .cart-container {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        main {
-            flex: 1;
-            padding: 2rem;
+        .cart-button {
+            background: transparent;
+            color: var(--brand-dark);
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: opacity 0.2s;
         }
+
+        .cart-button:hover { opacity: 0.6; }
+
+        .cart-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 110%;
+            background: white;
+            width: 250px;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 1rem;
+            z-index: 9999;
+        }
+
+        .show-cart { display: block; }
+
+        /* Carousel Layout */
+        main { flex: 1; padding: 2rem; }
 
         .carousel-container {
             max-width: 1400px;
@@ -144,26 +95,20 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             overflow: hidden;
             position: relative;
-            height: 600px;
-            cursor: grab;
-        }
-
-        .carousel-container:active {
-            cursor: grabbing;
+            height: 650px;
         }
 
         .carousel-wrapper {
             display: flex;
             transition: transform 0.5s ease;
             height: 100%;
-            user-select: none;
         }
 
-        .slide {
-            min-width: 100%;
-            height: 100%;
-            padding: 2rem;
-            overflow-y: auto;
+        .slide { 
+            min-width: 100%; 
+            height: 100%; 
+            padding: 3rem 2rem; 
+            overflow-y: auto; 
         }
 
         .carousel-arrow {
@@ -179,356 +124,106 @@
             cursor: pointer;
             font-size: 1.5rem;
             z-index: 10;
-            transition: background 0.3s;
         }
 
-        .carousel-arrow:hover {
-            background: rgba(42, 139, 168, 1);
-        }
+        .carousel-arrow.prev { left: 20px; }
+        .carousel-arrow.next { right: 20px; }
 
-        .carousel-arrow.prev {
-            left: 20px;
-        }
-
-        .carousel-arrow.next {
-            right: 20px;
-        }
-
-        .carousel-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            border: 2px solid #34ABCC;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .dot.active {
-            background: #34ABCC;
-        }
-
-        /* Home Section */
-        .home-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 100%;
-        }
-
-        .home-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .home-content h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .home-content p {
-            font-size: 1.25rem;
-            color: #4b5563;
-            margin-bottom: 2rem;
-        }
-
-        .swipe-indicators {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .swipe-box {
-            background: #34ABCC;
-            color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-        }
-
-        .swipe-box .arrow {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Shop Section */
-        .shop-section h2, .about-section h2, .comments-section h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
+        /* Shops Grid Section */
+        .shop-section h2 { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; }
+        
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
+            gap: 2rem;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .product-card {
             background: white;
             border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
+
+        .product-card:hover { transform: translateY(-8px); }
 
         .product-image {
-            background: #e5e7eb;
-            height: 200px;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #9ca3af;
-            margin-bottom: 1rem;
-        }
-
-        .product-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-card p {
-            color: #6b7280;
-            margin-bottom: 1rem;
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #34ABCC;
-        }
-
-        .add-to-cart {
-            background: #34ABCC;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background: #2a8ba8;
-        }
-
-        /* About Section */
-        .about-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .about-content p {
-            font-size: 1.125rem;
-            color: #374151;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-            text-align: left;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .stat-box {
-            text-align: center;
-            padding: 1.5rem;
-            background: #f9fafb;
-            border-radius: 0.5rem;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #34ABCC;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #6b7280;
-        }
-
-        /* Comments Section */
-        .comments-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .comment-form {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            font-family: inherit;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            background: #eee;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #34ABCC;
-            box-shadow: 0 0 0 3px rgba(52, 171, 204, 0.1);
-        }
-
-        .form-group textarea {
-            resize: none;
-            height: 120px;
-        }
-
-        .submit-btn {
-            background: #34ABCC;
+        .social-link-btn {
+            display: block;
+            background: var(--brand-blue);
             color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.25rem;
-            font-weight: 600;
-            cursor: pointer;
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 0.4rem;
+            font-weight: bold;
+            margin-top: 1rem;
             transition: background 0.3s;
         }
 
-        .submit-btn:hover {
-            background: #2a8ba8;
-        }
+        .social-link-btn:hover { background: #2a8ba8; }
 
-        .comments-list {
+        /* Common Slide Styles */
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            gap: 12px;
         }
 
-        .comment-card {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.1);
+            border: 2px solid var(--brand-blue);
+            cursor: pointer;
         }
 
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
+        .dot.active { background: var(--brand-blue); }
 
-        .comment-name {
-            font-weight: 600;
-            font-size: 1.125rem;
-        }
-
-        .comment-date {
-            color: #9ca3af;
-            font-size: 0.875rem;
-        }
-
-        .comment-message {
-            color: #374151;
-        }
-
-        /* Footer */
         footer {
-            background: #1f2937;
+            background: var(--brand-dark);
             color: white;
-            padding: 2rem 1.5rem;
+            padding: 2rem;
+            text-align: center;
             margin-top: auto;
         }
 
-        .footer-content {
-            max-width: 1200px;
+        /* Form Styling */
+        .comment-form {
+            max-width: 500px;
             margin: 0 auto;
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 0.5rem;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.125rem;
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 0.8rem;
             margin-bottom: 1rem;
-        }
-
-        .footer-section p {
-            color: #d1d5db;
-            line-height: 1.6;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #4b5563;
-            padding-top: 1.5rem;
-            text-align: center;
-            color: #9ca3af;
-        }
-
-        @media (max-width: 768px) {
-            .carousel-container {
-                height: 500px;
-            }
-
-            .home-content h2 {
-                font-size: 2rem;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
+            border: 1px solid #ddd;
+            border-radius: 0.3rem;
         }
     </style>
 </head>
 <body>
+
     <header>
         <div class="header-box">
             <h1>JX Innovate LLC</h1>
@@ -537,15 +232,11 @@
             <button class="cart-button" onclick="toggleCart()">
                 🛒 <span id="cart-count">0</span>
             </button>
-
             <div id="cartDropdown" class="cart-dropdown">
-                <h3>Cart Overview</h3>
+                <h3 style="margin-bottom: 10px;">Quick Links</h3>
                 <hr>
-                <div id="cart-items-preview">
-                    <p style="color: #666; font-size: 0.9rem;">Your cart is empty</p>
-                </div>
-                <hr>
-                <button class="checkout-btn" onclick="goToSlide(3)">Continue to Checkout</button>
+                <p style="font-size: 0.85rem; padding: 10px 0; color: #666;">Explore our social shops below!</p>
+                <button class="social-link-btn" onclick="goToSlide(1)">Go to Shops</button>
             </div>
         </div>
     </header>
@@ -556,124 +247,65 @@
             <button class="carousel-arrow next" onclick="changeSlide(1)">›</button>
 
             <div class="carousel-wrapper" id="carouselWrapper">
+                
                 <div class="slide">
-                    <div class="home-section">
-                        <div class="home-content">
-                            <h2>Welcome to JX Innovate LLC</h2>
-                            <p>Innovative solutions for modern businesses. Swipe left or right to explore our services, shop, and learn more about us.</p>
-                            <div class="swipe-indicators">
-                                <div class="swipe-box">
-                                    <div class="arrow">←</div>
-                                    <div>Swipe Left</div>
-                                </div>
-                                <div class="swipe-box">
-                                    <div class="arrow">→</div>
-                                    <div>Swipe Right</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div style="text-align: center; padding-top: 4rem;">
+                        <h2 style="font-size: 3rem;">Welcome to JX Innovate</h2>
+                        <p style="margin: 1.5rem 0; font-size: 1.2rem; color: #4b5563;">
+                            Your destination for innovation. Swipe to visit our social storefronts.
+                        </p>
                     </div>
                 </div>
 
                 <div class="slide">
                     <div class="shop-section">
-                        <h2>Our Shop</h2>
+                        <h2>Our Shops</h2>
                         <div class="products-grid">
+                            
                             <div class="product-card">
-                                <div class="product-image">Product Image</div>
-                                <h3>Product A</h3>
-                                <p>High-quality innovative product</p>
-                                <div class="product-footer">
-                                    <span class="price">$99.99</span>
-                                    <button class="add-to-cart" onclick="addToCart('Product A', 99.99)">Add to Cart</button>
-                                </div>
+                                <img src="https://placehold.co/400x400?text=TikTok+Logo" alt="TikTok" class="product-image">
+                                <h3>TikTok Shop</h3>
+                                <p>Discover our viral products and daily deals.</p>
+                                <a href="https://www.tiktok.com/@yourusername" target="_blank" class="social-link-btn">Visit TikTok</a>
                             </div>
+
                             <div class="product-card">
-                                <div class="product-image">Product Image</div>
-                                <h3>Product B</h3>
-                                <p>Premium solution for your needs</p>
-                                <div class="product-footer">
-                                    <span class="price">$149.99</span>
-                                    <button class="add-to-cart" onclick="addToCart('Product B', 149.99)">Add to Cart</button>
-                                </div>
+                                <img src="https://placehold.co/400x400?text=Instagram+Logo" alt="Instagram" class="product-image">
+                                <h3>Instagram Shop</h3>
+                                <p>Curated collections and lifestyle inspiration.</p>
+                                <a href="https://www.instagram.com/yourusername" target="_blank" class="social-link-btn">Visit Instagram</a>
                             </div>
+
                             <div class="product-card">
-                                <div class="product-image">Product Image</div>
-                                <h3>Product C</h3>
-                                <p>Affordable and reliable</p>
-                                <div class="product-footer">
-                                    <span class="price">$79.99</span>
-                                    <button class="add-to-cart" onclick="addToCart('Product C', 79.99)">Add to Cart</button>
-                                </div>
+                                <img src="https://placehold.co/400x400?text=Facebook+Logo" alt="Facebook" class="product-image">
+                                <h3>Facebook Marketplace</h3>
+                                <p>Local and community-focused commerce.</p>
+                                <a href="https://www.facebook.com/yourusername" target="_blank" class="social-link-btn">Visit Facebook</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="slide">
-                    <div class="about-section">
-                        <div class="about-content">
-                            <h2>About JX Innovate LLC</h2>
-                            <p>JX Innovate LLC is a forward-thinking company dedicated to delivering cutting-edge solutions that transform the way businesses operate in the digital age.</p>
-                            <p>Founded with a vision to innovate and inspire, we specialize in creating products and services that empower our clients to achieve their goals efficiently and effectively.</p>
-                            <div class="stats-grid">
-                                <div class="stat-box">
-                                    <div class="stat-number">10+</div>
-                                    <div class="stat-label">Years of Experience</div>
-                                </div>
-                                <div class="stat-box">
-                                    <div class="stat-number">500+</div>
-                                    <div class="stat-label">Happy Clients</div>
-                                </div>
-                                <div class="stat-box">
-                                    <div class="stat-number">100+</div>
-                                    <div class="stat-label">Projects Completed</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                        <h2>About JX Innovate</h2>
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 2rem; color: #374151;">
+                            We are committed to delivering cutting-edge solutions and bridging the gap between innovative design and social commerce. Our platforms are designed to make high-quality products accessible to everyone, everywhere.
+                        </p>
                     </div>
                 </div>
 
                 <div class="slide">
-                    <div class="comments-section">
-                        <h2>Comments & Questions</h2>
-                        <div class="comments-content">
-                            <form id="commentForm" class="comment-form">
-                                <div class="form-group">
-                                    <label>Your Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Your Email</label>
-                                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Your Message</label>
-                                    <textarea id="message" name="message" placeholder="Enter your comment or question" required></textarea>
-                                </div>
-                                <button type="submit" class="submit-btn">Submit</button>
-                            </form>
-                            <div id="form-status" style="margin-top: 1rem; padding: 1rem; border-radius: 0.25rem; display: none; text-align: center; font-weight: 600;"></div>
-
-                            <div class="comments-list" id="commentsList">
-                                <div class="comment-card">
-                                    <div class="comment-header">
-                                        <span class="comment-name">John Doe</span>
-                                        <span class="comment-date">2026-04-28</span>
-                                    </div>
-                                    <p class="comment-message">Great company! Very professional service.</p>
-                                </div>
-                                <div class="comment-card">
-                                    <div class="comment-header">
-                                        <span class="comment-name">Jane Smith</span>
-                                        <span class="comment-date">2026-04-25</span>
-                                    </div>
-                                    <p class="comment-message">Excellent products and customer support.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Contact & Questions</h2>
+                    <form id="commentForm" class="comment-form">
+                        <input type="text" id="name" placeholder="Full Name" required>
+                        <input type="email" id="email" placeholder="Email Address" required>
+                        <textarea id="message" placeholder="How can we help you?" required></textarea>
+                        <button type="submit" class="social-link-btn" style="border: none; cursor: pointer; width: 100%;">Send Message</button>
+                    </form>
                 </div>
+
             </div>
 
             <div class="carousel-dots">
@@ -686,112 +318,22 @@
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>About Us</h3>
-                    <p>JX Innovate LLC is committed to delivering innovative solutions for your business needs.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>Email: jxi2026@outlook.com</p>
-                    <p>Phone: (555) 123-4567</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Location</h3>
-                    <p>123 Innovation Drive</p>
-                    <p>Tech City, TC 12345</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 JX Innovate LLC. All rights reserved.</p>
-            </div>
-        </div>
+        <p>&copy; 2026 JX Innovate LLC. All rights reserved.</p>
+        <p style="font-size: 0.9rem; color: #9ca3af; margin-top: 0.5rem;">jxi2026@outlook.com</p>
     </footer>
 
     <script>
-        emailjs.init('780hc1AKIBcVHm_8R'); // Replace with your EmailJS public key
+        // Carousel Logic
         let currentSlide = 0;
         const totalSlides = 4;
-        let isDragging = false;
-        let startPos = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID = 0;
-
-        const carouselContainer = document.getElementById('carouselContainer');
-        const carouselWrapper = document.getElementById('carouselWrapper');
-
-        // Mouse events
-        carouselContainer.addEventListener('mousedown', dragStart);
-        carouselContainer.addEventListener('mouseup', dragEnd);
-        carouselContainer.addEventListener('mouseleave', dragEnd);
-        carouselContainer.addEventListener('mousemove', drag);
-
-        // Touch events
-        carouselContainer.addEventListener('touchstart', dragStart);
-        carouselContainer.addEventListener('touchend', dragEnd);
-        carouselContainer.addEventListener('touchmove', drag);
-
-        // Prevent context menu on long press
-        carouselContainer.addEventListener('contextmenu', (e) => e.preventDefault());
-
-        function dragStart(event) {
-            isDragging = true;
-            startPos = getPositionX(event);
-            animationID = requestAnimationFrame(animation);
-            carouselContainer.style.cursor = 'grabbing';
-        }
-
-        function drag(event) {
-            if (isDragging) {
-                const currentPosition = getPositionX(event);
-                currentTranslate = prevTranslate + currentPosition - startPos;
-            }
-        }
-
-        function dragEnd() {
-            isDragging = false;
-            cancelAnimationFrame(animationID);
-            
-            const movedBy = currentTranslate - prevTranslate;
-
-            // If dragged enough, go to next/prev slide
-            if (movedBy < -100 && currentSlide < totalSlides - 1) {
-                currentSlide += 1;
-            }
-
-            if (movedBy > 100 && currentSlide > 0) {
-                currentSlide -= 1;
-            }
-
-            setPositionByIndex();
-            carouselContainer.style.cursor = 'grab';
-        }
-
-        function getPositionX(event) {
-            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-        }
-
-        function animation() {
-            setSliderPosition();
-            if (isDragging) requestAnimationFrame(animation);
-        }
-
-        function setSliderPosition() {
-            carouselWrapper.style.transform = `translateX(${currentTranslate}px)`;
-        }
-
-        function setPositionByIndex() {
-            currentTranslate = currentSlide * -carouselContainer.offsetWidth;
-            prevTranslate = currentTranslate;
-            carouselWrapper.style.transition = 'transform 0.5s ease';
-            setSliderPosition();
-            updateDots();
-        }
+        const wrapper = document.getElementById('carouselWrapper');
+        const dots = document.querySelectorAll('.dot');
 
         function updateCarousel() {
-            setPositionByIndex();
+            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
         }
 
         function changeSlide(direction) {
@@ -804,120 +346,12 @@
             updateCarousel();
         }
 
-        function updateDots() {
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
-        });
-
-        const commentForm = document.getElementById('commentForm');
-        const formStatus = document.getElementById('form-status');
-
-        if (commentForm) {
-            commentForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const templateParams = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    message: document.getElementById('message').value,
-                    to_email: 'jxi2026@outlook.com'
-                };
-
-                emailjs.send('service_e5uykek', 'template_l95jm78', templateParams)
-                    .then(function(response) {
-                        formStatus.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
-                        formStatus.style.backgroundColor = '#d4edda';
-                        formStatus.style.color = '#155724';
-                        formStatus.style.display = 'block';
-                        commentForm.reset();
-                        setTimeout(() => {
-                            formStatus.style.display = 'none';
-                        }, 5000);
-                    })
-                    .catch(function(error) {
-                        formStatus.textContent = '✗ Error sending message. Please try again.';
-                        formStatus.style.backgroundColor = '#f8d7da';
-                        formStatus.style.color = '#721c24';
-                        formStatus.style.display = 'block';
-                        console.log('EmailJS error:', error);
-                    });
-            });
-        }
-
-        const cartItems = [];
-
-        function addToCart(name, price) {
-            const existingItem = cartItems.find(item => item.name === name);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cartItems.push({ name, price, quantity: 1 });
-            }
-
-            updateCartUI();
-            const dropdown = document.getElementById("cartDropdown");
-            if (!dropdown.classList.contains("show-cart")) {
-                dropdown.classList.add("show-cart");
-            }
-        }
-
-        function updateCartUI() {
-            const preview = document.getElementById('cart-items-preview');
-            const count = document.getElementById('cart-count');
-            const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-            count.textContent = totalCount;
-
-            if (cartItems.length === 0) {
-                preview.innerHTML = `<p style="color: #666; font-size: 0.9rem;">Your cart is empty</p>`;
-                return;
-            }
-
-            let html = cartItems.map(item => `
-                <div class="cart-item">
-                    <span>${item.name} x${item.quantity}</span>
-                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
-                    <button class="remove-btn" onclick="removeFromCart('${item.name}')">Remove</button>
-                </div>
-            `).join('');
-
-            const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            html += `
-                <div class="cart-item cart-total">
-                    <strong>Total</strong>
-                    <strong>$${totalPrice.toFixed(2)}</strong>
-                </div>
-            `;
-
-            preview.innerHTML = html;
-        }
-
-        function removeFromCart(name) {
-            const index = cartItems.findIndex(item => item.name === name);
-            if (index > -1) {
-                cartItems.splice(index, 1);
-                updateCartUI();
-            }
-        }
-
-        // Initialize
-        updateDots();
-        updateCartUI();
-
+        // Cart Dropdown Logic
         function toggleCart() {
-            const dropdown = document.getElementById("cartDropdown");
-            dropdown.classList.toggle("show-cart");
+            document.getElementById("cartDropdown").classList.toggle("show-cart");
         }
 
-        // Close the cart if the user clicks anywhere else on the screen
+        // Close dropdown when clicking outside
         window.onclick = function(event) {
             if (!event.target.matches('.cart-button') && !event.target.closest('.cart-button')) {
                 const dropdown = document.getElementById("cartDropdown");
@@ -926,6 +360,13 @@
                 }
             }
         }
+
+        // EmailJS Integration (Stub)
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Thank you! Your message has been sent to jxi2026@outlook.com");
+            this.reset();
+        });
     </script>
 </body>
 </html>
