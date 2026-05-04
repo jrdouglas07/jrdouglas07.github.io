@@ -491,22 +491,88 @@
         }
 
         @media (max-width: 768px) {
-            .carousel-container {
-                height: 500px;
-            }
+    /* 1. Adjust the header so the title doesn't overlap the cart */
+    header {
+        padding: 1.5rem 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
 
-            .home-content h2 {
-                font-size: 2rem;
-            }
+    .header-box {
+        padding: 0.5rem 1.5rem;
+    }
 
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
+    h1 {
+        font-size: 1.4rem;
+    }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    .cart-container {
+        position: static;
+        transform: none;
+    }
+
+    /* 2. Fix the Carousel Height - 600px is too tall for most phones */
+    .carousel-container {
+        height: 85vh; /* Allow content to dictate height on mobile */
+        max-height: 700px;min-height: 550px;
+    }
+
+    .slide {
+        padding: 1.5rem 1rem; /* Less padding to give content more room */
+    }
+
+    /* 3. Fix the Home Slide overlapping text */
+    .home-content h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .home-content p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    .swipe-box {
+        padding: 1rem;
+    }
+
+    /* 4. Fix Shop Slide - Grid items are too big */
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .product-card {
+        padding: 1.1rem;
+    }
+
+    .product-image-container {
+        height: 140px; /* Smaller images on mobile */
+    }
+
+    /* 5. Fix About Slide - Stats need to stack */
+    .stats-grid {
+        grid-template-columns: 1fr; /* Stack vertically */
+        gap: 0.5rem;
+    }
+
+    .stat-box {
+        padding: 0.75rem;
+    }
+
+    /* 6. Fix Comments Slide - Forms and buttons */
+    .form-group textarea {
+        height: 80px; /* Shorter textarea to prevent scrolling issues */
+    }
+
+    .carousel-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        background: rgba(52, 171, 204, 0.6);
+    }
+}
     </style>
 </head>
 <body>
@@ -563,7 +629,7 @@
                             
                             <div class="product-card">
                                 <div class="product-image-container">
-                                    <img src="https://placehold.co/400x400?text=TikTok+Store" alt="TikTok Store">
+                                    <img src="https://placehold.co/400x400?text=TikTok+Store" alt="TikTok Store" draggable="false">
                                 </div>
                                 <h3>TikTok Shop</h3>
                                 <p>Discover our viral products and daily deals.</p>
@@ -572,7 +638,7 @@
 
                             <div class="product-card">
                                 <div class="product-image-container">
-                                    <img src="https://placehold.co/400x400?text=Instagram+Store" alt="Instagram Store">
+                                    <img src="https://placehold.co/400x400?text=Instagram+Store" alt="Instagram Store" draggable="false">
                                 </div>
                                 <h3>Instagram Shop</h3>
                                 <p>Follow us for updates and exclusive content.</p>
@@ -581,7 +647,7 @@
 
                             <div class="product-card">
                                 <div class="product-image-container">
-                                    <img src="https://placehold.co/400x400?text=Facebook+Market" alt="Facebook Market">
+                                    <img src="https://placehold.co/400x400?text=Facebook+Market" alt="Facebook Market" draggable="false">
                                 </div>
                                 <h3>Facebook Marketplace</h3>
                                 <p>Connect with our community storefront.</p>
