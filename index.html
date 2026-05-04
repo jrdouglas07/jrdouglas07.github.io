@@ -294,6 +294,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            pointer-events: none;
+            -webkit-user-drag: none;
+            user-select: none;
         }
 
         .social-link-btn {
@@ -911,23 +914,34 @@
             dropdown.classList.toggle("show-cart");
         }
 
+        // --- STEP 2: GLOBAL SAFETY LOGIC ---
+        
+        // 1. Close cart if clicking outside
         window.onclick = function(event) {
             if (!event.target.matches('.cart-button') && !event.target.closest('.cart-button')) {
                 const dropdown = document.getElementById("cartDropdown");
-                if (dropdown.classList.contains('show-cart')) {
+                if (dropdown && dropdown.classList.contains('show-cart')) {
                     dropdown.classList.remove('show-cart');
                 }
             }
-        }
+        };
 
-        // Handle window resizing
+        // 2. Global mouseup reset: Stops the "stuck hand" if you let go outside the window
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                dragEnd();
+            }
+        });
+
+        // 3. Force-disable browser image dragging (Hammer approach)
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+            });
+        });
+
+        // 4. Handle window resizing to keep slides aligned
         window.addEventListener('resize', setPositionByIndex);
-
-        // Force-disable default browser image dragging globally
-document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-});
     </script>
 </body>
 </html>
